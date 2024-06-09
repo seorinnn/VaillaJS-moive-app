@@ -794,7 +794,7 @@ class Search extends (0, _heropy.Component) {
     render() {
         this.el.classList.add("search");
         this.el.innerHTML = `
-    <input placeholder="Enter the movie title to search!" />
+    <input value="${(0, _movieDefault.default).state.searchText}"placeholder="Enter the movie title to search!" />
     <button class="btn btn-primary">Search!</button>
     `;
         const inputEl = this.el.querySelector("input");
