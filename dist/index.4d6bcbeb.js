@@ -968,11 +968,12 @@ class Movie extends (0, _heropy.Component) {
     async render() {
         await (0, _movie.getMovieDetails)(history.state.id);
         console.log((0, _movieDefault.default).state.movie);
-        const { movie } = (0, _movieDefault.default).state;
+        const { movie } = (0, _movieDefault.default).state; //구조분해할당
+        const bigPoster = movie.Poster.replace("SX300", "SX700");
         this.el.classList.add("container", "the-movie");
         this.el.innerHTML = `
       <div
-        style="background-image:url(${movie.Poster})"
+        style="background-image:url(${bigPoster})"
         class="poster"></div>
       <div class="specs">
         <div class="title">
