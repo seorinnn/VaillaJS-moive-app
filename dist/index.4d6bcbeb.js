@@ -599,16 +599,19 @@ parcelHelpers.defineInteropFlag(exports);
 var _heropyJs = require("./core/heropy.js");
 var _theHeaderJs = require("./components/TheHeader.js");
 var _theHeaderJsDefault = parcelHelpers.interopDefault(_theHeaderJs);
+var _theFooterJs = require("./components/TheFooter.js");
+var _theFooterJsDefault = parcelHelpers.interopDefault(_theFooterJs);
 class App extends (0, _heropyJs.Component) {
     render() {
         const theHeader = new (0, _theHeaderJsDefault.default)().el;
+        const theFooter = new (0, _theFooterJsDefault.default)().el;
         const routerView = document.createElement("router-view");
-        this.el.append(theHeader, routerView);
+        this.el.append(theHeader, routerView, theFooter);
     }
 }
 exports.default = App;
 
-},{"./core/heropy.js":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/TheHeader.js":"3Cyq4"}],"57bZf":[function(require,module,exports) {
+},{"./core/heropy.js":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/TheHeader.js":"3Cyq4","./components/TheFooter.js":"b3x3c"}],"57bZf":[function(require,module,exports) {
 ///// Component /////
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -783,6 +786,50 @@ class TheHeader extends (0, _heropy.Component) {
 }
 exports.default = TheHeader;
 
+},{"../core/heropy":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3x3c":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _heropy = require("../core/heropy");
+var _about = require("../store/about");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
+class THeFooter extends (0, _heropy.Component) {
+    constructor(){
+        super({
+            tagName: "footer"
+        });
+    }
+    render() {
+        const { github, repository } = (0, _aboutDefault.default).state;
+        this.el.innerHTML = `
+      <div>
+        <a href="${repository}">
+          Github Repository
+        </a>
+      </div>
+      <div>
+        <a href="${github}">
+          ${new Date().getFullYear()}
+          Seorin
+        </a>
+      </div>
+    `;
+    }
+}
+exports.default = THeFooter;
+
+},{"../core/heropy":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}],"4RAJO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _heropy = require("../core/heropy");
+exports.default = new (0, _heropy.Store)({
+    photo: "https://heropy.blog/css/images/logo.png",
+    name: "RINNING / ChoiSeoRin",
+    email: "srgongju@naver.com",
+    blog: "https://velog.io/@seorinnn/posts",
+    github: "https://github.com/seorinnn",
+    repository: "https://github.com/seorinnn/VaillaJS-moive-app"
+});
+
 },{"../core/heropy":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3L9mC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -791,6 +838,8 @@ var _home = require("./Home");
 var _homeDefault = parcelHelpers.interopDefault(_home);
 var _movie = require("./Movie");
 var _movieDefault = parcelHelpers.interopDefault(_movie);
+var _about = require("./About");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
 exports.default = (0, _heropy.createRouter)([
     {
         path: "#/",
@@ -799,10 +848,14 @@ exports.default = (0, _heropy.createRouter)([
     {
         path: "#/movie",
         component: (0, _movieDefault.default)
+    },
+    {
+        path: "#/about",
+        component: (0, _aboutDefault.default)
     }
 ]);
 
-},{"../core/heropy":"57bZf","./Home":"0JSNG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Movie":"1LTyN"}],"0JSNG":[function(require,module,exports) {
+},{"../core/heropy":"57bZf","./Home":"0JSNG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./Movie":"1LTyN","./About":"gdB30"}],"0JSNG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _heropy = require("../core/heropy");
@@ -1082,6 +1135,38 @@ class Movie extends (0, _heropy.Component) {
 }
 exports.default = Movie;
 
-},{"../core/heropy":"57bZf","../store/movie":"kq1bo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["anvqh","gLLPy"], "gLLPy", "parcelRequire63d4")
+},{"../core/heropy":"57bZf","../store/movie":"kq1bo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gdB30":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _heropy = require("../core/heropy");
+var _about = require("../store/about");
+var _aboutDefault = parcelHelpers.interopDefault(_about);
+class About extends (0, _heropy.Component) {
+    render() {
+        const { photo, name, email, github, blog } = (0, _aboutDefault.default).state;
+        this.el.classList.add("container", "about");
+        this.el.innerHTML = `
+      <div
+        style="background-image: url(${photo});"
+        class="photo">
+      </div>
+      <p class="name">${name}</p>
+      <p>
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=${email}"
+          target="_blank">
+          ${email}
+        </a>
+      </p>
+      <p>
+        <a href="${github}" target="_blank">Github</a></p>
+      <p>
+        <a href="${blog}" target="_blank">Blog</a></p>
+    `;
+    }
+}
+exports.default = About;
+
+},{"../core/heropy":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../store/about":"4RAJO"}]},["anvqh","gLLPy"], "gLLPy", "parcelRequire63d4")
 
 //# sourceMappingURL=index.4d6bcbeb.js.map

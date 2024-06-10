@@ -1,4 +1,5 @@
 import { Component } from "../core/heropy";
+import aboutStore from "../store/about";
 
 export default class THeFooter extends Component {
   constructor() {
@@ -7,14 +8,15 @@ export default class THeFooter extends Component {
     });
   }
   render() {
+    const { github, repository } = aboutStore.state;
     this.el.innerHTML = `
       <div>
-        <a href="https://github.com/seorinnn/VaillaJS-moive-app">
+        <a href="${repository}">
           Github Repository
         </a>
       </div>
       <div>
-        <a href="https://github.com/seorinnn">
+        <a href="${github}">
           ${new Date().getFullYear()}
           Seorin
         </a>
