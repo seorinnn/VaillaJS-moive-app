@@ -597,15 +597,18 @@ root.append(new (0, _appDefault.default)().el);
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _heropyJs = require("./core/heropy.js");
+var _theHeaderJs = require("./components/TheHeader.js");
+var _theHeaderJsDefault = parcelHelpers.interopDefault(_theHeaderJs);
 class App extends (0, _heropyJs.Component) {
     render() {
+        const theHeader = new (0, _theHeaderJsDefault.default)().el;
         const routerView = document.createElement("router-view");
-        this.el.append(routerView);
+        this.el.append(theHeader, routerView);
     }
 }
 exports.default = App;
 
-},{"./core/heropy.js":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"57bZf":[function(require,module,exports) {
+},{"./core/heropy.js":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/TheHeader.js":"3Cyq4"}],"57bZf":[function(require,module,exports) {
 ///// Component /////
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -718,7 +721,69 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"3L9mC":[function(require,module,exports) {
+},{}],"3Cyq4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _heropy = require("../core/heropy");
+class TheHeader extends (0, _heropy.Component) {
+    constructor(){
+        super({
+            tagName: "header",
+            state: {
+                menus: [
+                    {
+                        name: "Search",
+                        href: "#/"
+                    },
+                    {
+                        name: "Movie",
+                        href: "#/movie?id=tt4520988"
+                    },
+                    {
+                        name: "About",
+                        href: "#/about"
+                    }
+                ]
+            }
+        });
+        window.addEventListener("popstate", ()=>{
+            this.render();
+        });
+    }
+    render() {
+        this.el.innerHTML = `
+      <a
+        href="#/"
+        class="logo">
+        <span>OMdBAPI.COM</span>
+      </a>
+      <nav>
+        <ul>
+          ${this.state.menus.map((menu)=>{
+            const href = menu.href.split("?")[0];
+            const hash = location.hash.split("?")[0];
+            const isActive = href === hash; //내비게이션 경로 일치 확인
+            return `
+              <li>
+                <a 
+                  class="${isActive ? "active" : ""}"
+                  href="${menu.href}">
+                  ${menu.name}
+                </a>
+              </li>
+            `;
+        }).join("")}
+        </ul>
+      </nav>
+      <a href="#/about" class="user">
+        <img src="https://heropy.blog/css/images/logo.png" alt="User"/>
+      </a>
+    `;
+    }
+}
+exports.default = TheHeader;
+
+},{"../core/heropy":"57bZf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3L9mC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _heropy = require("../core/heropy");
