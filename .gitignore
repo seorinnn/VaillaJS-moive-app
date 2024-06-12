@@ -1,0 +1,6 @@
+.vercel
+.parcel-cache
+dist
+node-moduels
+.DS_Store
+.vscode
